@@ -1,8 +1,30 @@
+/* Tag Selectors */
+
 h1 {
   color: red;
   font-size: 50px;
 }
 
-img {
+img:hover {
+  background-color: gold;
+}
+
+/* CSS Class Selectors */
+
+.bacon {
+  background-color: green;
+}
+
+.broccoli {
   background-color: red;
+}
+
+.circular {
+  border-radius: 100%;
+}
+
+/* CSS ID Selectors */
+
+#heading {
+  color: blue;
 }
