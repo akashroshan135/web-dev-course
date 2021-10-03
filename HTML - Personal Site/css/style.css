@@ -1,3 +1,11 @@
+/* 
+CSS Syntax
+
+Selector {
+  property: value;
+}
+*/
+
 body {
   background-color: #e4f9f5;
 }
