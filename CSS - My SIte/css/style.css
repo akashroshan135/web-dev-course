@@ -4,11 +4,18 @@ body {
   font-family: "Merriweather Sans", sans-serif;
 }
 
+/* 16px = 100% = 1em */
 h1 {
   font-family: "Sacramento", cursive;
+  font-size: 5.625rem;
+  margin: 50px auto 0 auto;
 }
 
-h2,
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+}
+
 h3 {
   font-family: "Montserrat", sans-serif;
 }
@@ -19,8 +26,8 @@ h3 {
   padding-top: 100px;
 }
 
-.middle-container {
-}
+/* .middle-container {
+} */
 
 .underline {
   text-decoration: underline;
