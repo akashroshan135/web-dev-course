@@ -1,6 +1,16 @@
 body {
   margin: 0;
   text-align: center;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+h1 {
+  font-family: "Sacramento", cursive;
+}
+
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
 }
 
 .top-container {
@@ -10,15 +20,6 @@ body {
 }
 
 .middle-container {
-  background-color: red;
-  height: 200px;
-  width: 200px;
-}
-
-.bottom-container {
-  background-color: yellow;
-  height: 200px;
-  width: 200px;
 }
 
 .underline {
