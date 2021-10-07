@@ -77,12 +77,6 @@ h1 {
   color: #ff4c68;
 }
 
-h3 {
-  font-family: "Montserrat";
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 p {
   color: #8f8f8f;
 }
@@ -132,4 +126,43 @@ h2 {
 
 .pricing-col {
   padding: 3% 2%;
+}
+
+/* Media Queries */
+
+@media (max-width: 1028px) {
+  #title {
+    text-align: center;
+  }
+
+  .title-image {
+    position: static;
+    transform: rotate(0);
+  }
+}
+
+/* Call to Action */
+
+#cta {
+  background-color: #ff4c68;
+  color: white;
+  text-align: center;
+  padding: 7% 15%;
+}
+
+h3 {
+  font-family: "Montserrat";
+  font-size: 3.5rem;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+#footer {
+  background-color: white;
+  text-align: center;
+  margin: 5% 10%;
+}
+
+.icon {
+  margin: 20px 10px;
 }
