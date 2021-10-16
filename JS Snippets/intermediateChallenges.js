@@ -19,3 +19,10 @@ function isLeap(year) {
 	}
 	return "Not leap year.";
 }
+
+// Who's Buying Lunch? Code Challenge
+
+function whosPaying(names) {
+	var randomPerson = Math.floor(Math.random() * names.length);
+	return names[randomPerson] + " is going to buy lunch today!";
+}
