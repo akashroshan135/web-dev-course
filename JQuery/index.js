@@ -5,7 +5,20 @@
 // 	$("h1").hasClass("margin-50");
 // });
 
-$("h1").text("Bye");
-$("button").html("<strong>Don't</strong> click me");
+$("h1").click(function () {
+	$("h1").css("color", "purple");
+});
+
+$("button").click(function () {
+	$("h1").css("color", "pink");
+});
 
 $("a").attr("href", "https://www.google.com/");
+
+$(document).keydown(function (event) {
+	$("h1").text(event.key);
+});
+
+$("h1").on("mouseover", function () {
+	$("h1").css("color", "red");
+});
