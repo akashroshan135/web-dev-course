@@ -1,11 +1,8 @@
-// document.querySelectorAll(".drum").forEach((button) => {
-// 	button.addEventListener("click", () => alert("clicked"));
-// });
-
-var numberOfDrums = document.querySelectorAll(".drum").length;
-
-for (let index = 0; index < numberOfDrums; index++) {
-	document
-		.querySelectorAll(".drum")
-		[index].addEventListener("click", () => alert("clicked"));
-}
+document.querySelectorAll(".drum").forEach((button) => {
+	button.addEventListener("click", function () {
+		console.log(this.innerHTML);
+		this.style.color = white;
+		// var audio = new Audio("sounds/tom-1.mp3");
+		// audio.play();
+	});
+});
