@@ -1,0 +1,12 @@
+body {
+  background-color: aquamarine;
+}
+
+.big-title {
+  font-size: 5rem;
+  color: yellow;
+}
+
+.margin-50 {
+  margin: 50px;
+}
