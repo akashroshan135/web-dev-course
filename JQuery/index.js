@@ -10,7 +10,20 @@ $("h1").click(function () {
 });
 
 $("button").click(function () {
-	$("h1").css("color", "pink");
+	// $("h1").hide();
+	// $("h1").show();
+	// $("h1").toggle();
+	// $("h1").fadeOut();
+	// $("h1").fadeIn();
+	// $("h1").fadeToggle();
+	// $("h1").slideToggle();
+	// $("h1").animate({ opacity: 0.45 });
+	// $("h1").animate({ margin: "20%" });
+	$("h1")
+		.slideUp()
+		.slideDown()
+		.animate({ opacity: 0.45 })
+		.animate({ margin: "20%" });
 });
 
 $("a").attr("href", "https://www.google.com/");
