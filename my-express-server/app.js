@@ -9,3 +9,11 @@ app.listen(port, () =>
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
+
+app.get("/contact", (req, res) => {
+	res.send("Contact me at @akashroshan135 on twitter");
+});
+
+app.get("/about", (req, res) => {
+	res.send("I make stuff");
+});
