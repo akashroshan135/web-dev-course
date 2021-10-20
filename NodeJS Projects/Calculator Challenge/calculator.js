@@ -5,10 +5,6 @@ const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () =>
-	console.log(`App listening at http://localhost:${port}`)
-);
-
 app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/index.html");
 });
@@ -34,3 +30,7 @@ app.post("/bmicalculator", (req, res) => {
 
 	res.send(`Your BMI is ${bmi}`);
 });
+
+app.listen(port, () =>
+	console.log(`App listening at http://localhost:${port}`)
+);
