@@ -3,7 +3,7 @@ const express = require("express");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const views = __dirname + "/views/";
 
 app.use(express.urlencoded({ extended: true }));
