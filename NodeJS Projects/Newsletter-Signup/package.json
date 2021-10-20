@@ -10,6 +10,7 @@
   "author": "akashroshan135",
   "license": "ISC",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.70",
     "dotenv": "^10.0.0",
     "express": "^4.17.1"
   }
