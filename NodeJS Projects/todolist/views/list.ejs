@@ -4,24 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>To Do List</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <% if (kindOfDay == "Saturday" || kindOfDay == "Sunday") { %>
-    <h1 style="color: purple"><%= kindOfDay %> List</h1>
-    <% } else { %>
-    <h1 style="color: pink"><%= kindOfDay %> List</h1>
-    <% } %>
+    <div class="box" id="heading">
+      <h1><%= kindOfDay %> List</h1>
+    </div>
 
-    <ul>
+    <div class="box">
       <% newItems.forEach(element => { %>
-      <li><%= element %></li>
+      <div class="item">
+        <input type="checkbox" name="" id="" />
+        <p><%= element %></p>
+      </div>
       <% }) %>
-    </ul>
 
-    <form action="/" method="post">
-      <input type="text" name="newItem" id="newItem" />
-      <button type="submit">Add</button>
-    </form>
+      <form action="/" method="post" class="item">
+        <input
+          type="text"
+          name="newItem"
+          placeholder="New item"
+          autocomplete="off"
+        />
+        <button type="submit">+</button>
+      </form>
+    </div>
   </body>
 </html>
