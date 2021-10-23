@@ -1,4 +1,5 @@
 const express = require("express");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 const port = 3000;
@@ -10,12 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-	let today = new Date().toLocaleDateString("en-US", {
-		weekday: "long",
-		day: "numeric",
-		month: "long",
-	});
-
+	const today = date.getDate();
 	res.render("list", { listTitle: today, Items: items });
 });
 
@@ -24,7 +20,7 @@ app.get("/work", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-	let item = req.body.newItem;
+	const item = req.body.newItem;
 
 	if (req.body.listBtn == "Work List") {
 		workItems.push(item);
