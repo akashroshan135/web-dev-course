@@ -1,65 +1,62 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
-// Connection URL
-const url = "mongodb://localhost:27017";
+main().catch((err) => console.log(err));
 
-// Create a new MongoClient
-const client = new MongoClient(url);
-
-// Database Name
-const dbName = "fruitsDB";
-
-async function run() {
-	try {
-		// Connect the client to the server
-		await client.connect();
-
-		// Establish and verify connection
-		await client.db("admin").command({ ping: 1 });
-		console.log("Connected successfully to server");
-
-		//creating collection
-		const database = client.db(dbName);
-		const fruits = database.collection("fruits");
-
-		// create an array of documents to insert
-		const doc = [
-			{
-				name: "Apple",
-				score: 8,
-				review: "Great fruit",
-			},
-			{
-				name: "Orange",
-				score: 5,
-				review: "Kind a sour",
-			},
-			{
-				name: "Banana",
-				score: 8,
-				review: "Great stuff!",
-			},
-		];
-
-		// this option prevents additional documents from being inserted if one fails
-		const options = { ordered: true };
-
-		const result = await fruits.insertMany(doc, options);
-		console.log(`${result.insertedCount} documents were inserted`);
-
-		// const query = { score: 8 };
-		// const cursor = fruits.find(query);
-		const cursor = fruits.find();
-
-		if ((await cursor.count()) === 0) {
-			console.log("No documents found!");
-		}
-		// replace console.dir with your callback to access individual elements
-		await cursor.forEach(console.dir);
-	} finally {
-		// Ensures that the client will close when you finish/error
-		await client.close();
-	}
+async function main() {
+	await mongoose.connect("mongodb://localhost:27017/fruitsDB");
 }
 
-run().catch(console.dir);
+const fruitSchema = new mongoose.Schema({
+	name: String,
+	rating: Number,
+	review: String,
+});
+const Fruit = mongoose.model("Fruits", fruitSchema);
+
+const fruitItem = new Fruit({
+	name: "Mango",
+	rating: 8,
+	review: "Great!",
+});
+
+// fruitItem.save();
+
+// Challenge
+const personSchema = new mongoose.Schema({
+	name: String,
+	age: Number,
+});
+const Person = mongoose.model("Persons", personSchema);
+
+const personItem = new Person({
+	name: "Akash",
+	age: 8,
+});
+
+// personItem.save((err) => {
+// 	if (err) return console.error(err);
+// 	console.log("Document inserted succussfully!");
+// });
+
+const kiwi = new Fruit({
+	name: "Kiwi",
+	rating: 9,
+	review: "Great!",
+});
+
+const orange = new Fruit({
+	name: "Orange",
+	rating: 7,
+	review: "Great!",
+});
+
+// Fruit.insertMany([kiwi, orange], (err) => {
+// 	if (err) return console.error(err);
+// 	console.log("Documents inserted succussfully!");
+// });
+
+// Allows node to terminate app using ctrl + c
+process.on("SIGINT", function () {
+	console.log("\nShutting down App");
+	process.exit(0);
+});
