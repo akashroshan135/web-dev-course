@@ -20,20 +20,20 @@ const fruitSchema = new mongoose.Schema({
 });
 const Fruit = mongoose.model("Fruits", fruitSchema);
 
-const fruitItem = new Fruit({
-	name: "Apple",
-	rating: 5,
-	review: "Awesome!",
-});
-
-fruitItem.save();
-
-// // Challenge
-// const personSchema = new mongoose.Schema({
-// 	name: String,
-// 	age: Number,
+// const fruitItem = new Fruit({
+// 	name: "Apple",
+// 	rating: 8,
+// 	review: "Awesome!",
 // });
-// const Person = mongoose.model("Persons", personSchema);
+
+// fruitItem.save();
+
+// Challenge
+const personSchema = new mongoose.Schema({
+	name: String,
+	age: Number,
+});
+const Person = mongoose.model("Persons", personSchema);
 
 // const personItem = new Person({
 // 	name: "Akash",
@@ -62,12 +62,38 @@ fruitItem.save();
 // 	console.log("Documents inserted succussfully!");
 // });
 
-// Fruit.find((err, fruits) => {
-// 	if (err) return console.error(err);
-// 	fruits.forEach((fruit) => {
-// 		console.log(fruit.name);
-// 	});
-// });
+Fruit.updateOne(
+	{ _id: "6176c013daf137631cdee1d1" },
+	{ name: "Banana" },
+	(err) => {
+		if (err) return console.error(err);
+		console.log("Updated data successfully");
+	}
+);
+
+Fruit.deleteOne({ name: "Banana" }, (err) => {
+	if (err) return console.error(err);
+	console.log("Deleted data successfully");
+});
+
+Fruit.find((err, fruits) => {
+	if (err) return console.error(err);
+	fruits.forEach((fruit) => {
+		console.log(fruit.name);
+	});
+});
+
+Person.deleteMany({ name: "Akash" }, (err) => {
+	if (err) return console.error(err);
+	console.log("Deleted data successfully");
+});
+
+Person.find((err, persons) => {
+	if (err) return console.error(err);
+	persons.forEach((person) => {
+		console.log(person.name);
+	});
+});
 
 // Allows node to terminate app using ctrl + c
 process.on("SIGINT", function () {
