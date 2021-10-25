@@ -55,8 +55,15 @@ const orange = new Fruit({
 // 	console.log("Documents inserted succussfully!");
 // });
 
+Fruit.find((err, fruits) => {
+	if (err) return console.error(err);
+	fruits.forEach((fruit) => {
+		console.log(fruit.name);
+	});
+});
+
 // Allows node to terminate app using ctrl + c
 process.on("SIGINT", function () {
-	console.log("\nShutting down App");
+	console.log("Shutting down app");
 	process.exit(0);
 });
