@@ -1,10 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 var _ = require("lodash");
 const date = require(__dirname + "/date.js");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+// const uri = "mongodb://localhost:27017/todoDB";
+const uri = `mongodb+srv://akash-admin:${process.env.ATLAS_PASSWORD}@cluster0.hilus.mongodb.net/todoDB?retryWrites=true&w=majority`;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +16,7 @@ app.use(express.static("public"));
 // connect Mongoose
 main().catch((err) => console.log(err));
 async function main() {
-	await mongoose.connect("mongodb://localhost:27017/todoDB");
+	await mongoose.connect(uri);
 }
 
 const tasksSchema = new mongoose.Schema({
@@ -138,5 +141,6 @@ app.get("/about", (req, res) => {
 });
 
 app.listen(port, () =>
-	console.log(`App listening at http://localhost:${port}`)
+	// console.log(`App listening at http://localhost:${port}`)
+	console.log(`App listening`)
 );
