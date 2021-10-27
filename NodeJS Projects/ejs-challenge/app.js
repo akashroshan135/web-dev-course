@@ -26,11 +26,11 @@ const contactContent =
 const postsSchema = new mongoose.Schema({
 	title: {
 		type: String,
-		required: [true, "Task field is empty"],
+		required: [true, "Title field is empty"],
 	},
 	message: {
 		type: String,
-		required: [true, "Task field is empty"],
+		required: [true, "Message field is empty"],
 	},
 });
 const Post = mongoose.model("Post", postsSchema);
