@@ -29,30 +29,69 @@ const Article = mongoose.model("Article", articlesSchema);
 
 app.get("/", (req, res) => res.send("Server is running"));
 
-app.get("/articles", (req, res) => {
-	Article.find((err, articles) => {
-		if (err) return console.error(err);
-		res.send(articles);
-	});
-});
+/////////////////////////////// Requests for all articles ///////////////////////////////
 
-app.post("/articles", (req, res) => {
-	const articleItem = new Article({
-		title: req.query.title,
-		content: req.query.content,
+app.route("/articles")
+	.get((req, res) => {
+		Article.find((err, articles) => {
+			if (err) return res.send(err);
+			res.send(articles);
+		});
+	})
+	.post((req, res) => {
+		const articleItem = new Article({
+			title: req.query.title,
+			content: req.query.content,
+		});
+		articleItem.save((err) => {
+			if (err) return res.send(err);
+			res.send("Article Added Successfully");
+		});
+	})
+	.delete((req, res) => {
+		Article.deleteMany((err) => {
+			if (err) return res.send(err);
+			res.send("All Articles Deleted Successfully");
+		});
 	});
-	articleItem.save((err) => {
-		if (err) return res.send(err);
-		res.send("Article Added Successfully");
-	});
-});
 
-app.delete("/articles", (req, res) => {
-	Article.deleteMany((err) => {
-		if (err) return res.send(err);
-		res.send("All Articles Deleted Successfully");
+/////////////////////////////// Requests for one article ///////////////////////////////
+
+app.route("/articles/:title")
+	.get((req, res) => {
+		Article.findOne({ title: req.params.title }, (err, article) => {
+			if (err) return res.send(err);
+			if (article) return res.send(article);
+			res.send("No article matching title found");
+		});
+	})
+	.put((req, res) => {
+		Article.replaceOne(
+			{ title: req.params.title },
+			{ title: req.query.title, content: req.query.content },
+			{ overwrite: true },
+			(err) => {
+				if (err) return res.send(err);
+				res.send("Article Updated Successfully");
+			}
+		);
+	})
+	.patch((req, res) => {
+		Article.findOneAndUpdate(
+			{ title: req.params.title },
+			{ title: req.query.title, content: req.query.content },
+			(err) => {
+				if (err) return res.send(err);
+				res.send("Article Updated Successfully");
+			}
+		);
+	})
+	.delete((req, res) => {
+		Article.deleteOne({ title: req.params.title }, (err) => {
+			if (err) return res.send(err);
+			res.send("Article Deleted Successfully");
+		});
 	});
-});
 
 app.listen(port, () =>
 	console.log(`App listening at http://localhost:${port}`)
