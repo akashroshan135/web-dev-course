@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const encrypt = require("mongoose-encryption");
+// const encrypt = require("mongoose-encryption");
+const md5 = require("md5");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,10 +22,10 @@ const userSchema = new mongoose.Schema({
 	email: String,
 	password: String,
 });
-userSchema.plugin(encrypt, {
-	secret: process.env.ENCRYPT_KEY,
-	encryptedFields: ["password"],
-});
+// userSchema.plugin(encrypt, {
+// 	secret: process.env.ENCRYPT_KEY,
+// 	encryptedFields: ["password"],
+// });
 const User = mongoose.model("User", userSchema);
 
 app.get("/", (req, res) => {
@@ -37,8 +38,7 @@ app.route("/login")
 	})
 	.post((req, res) => {
 		const userEmail = req.body.username;
-		const userPassword = req.body.password;
-
+		const userPassword = md5(req.body.password);
 		User.findOne({ email: userEmail }, (err, user) => {
 			if (err) return console.log(err);
 			if (!user) return console.log("User not found");
@@ -54,7 +54,7 @@ app.route("/register")
 	.post((req, res) => {
 		const newUser = new User({
 			email: req.body.username,
-			password: req.body.password,
+			password: md5(req.body.password),
 		});
 		newUser.save((err) => {
 			if (err) return console.log(err);
