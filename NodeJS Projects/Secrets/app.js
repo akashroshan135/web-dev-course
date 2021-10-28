@@ -47,17 +47,8 @@ app.route("/login")
 	.get((req, res) => {
 		res.render("login");
 	})
-	.post((req, res) => {
-		const user = new User({
-			username: req.body.username,
-			password: req.body.password,
-		});
-		req.login(user, (err) => {
-			if (err) return console.log(err);
-			passport.authenticate("local")(req, res, () =>
-				res.redirect("/secrets")
-			);
-		});
+	.post(passport.authenticate("local"), (req, res) => {
+		res.redirect("/secrets");
 	});
 
 app.get("/logout", (req, res) => {
