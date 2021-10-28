@@ -2,10 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 // const encrypt = require("mongoose-encryption");
-const md5 = require("md5");
+// const md5 = require("md5");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const port = process.env.PORT || 3000;
+const saltRounds = 10;
 const uri = "mongodb://localhost:27017/userDB";
 
 app.set("view engine", "ejs");
@@ -38,12 +40,15 @@ app.route("/login")
 	})
 	.post((req, res) => {
 		const userEmail = req.body.username;
-		const userPassword = md5(req.body.password);
+		const userPassword = req.body.password;
 		User.findOne({ email: userEmail }, (err, user) => {
 			if (err) return console.log(err);
 			if (!user) return console.log("User not found");
-			if (user.password === userPassword) return res.render("secrets");
-			res.send("Wrong Password");
+			bcrypt.compare(userPassword, user.password, (err, result) => {
+				if (err) return console.log(err);
+				if (result) res.render("secrets");
+				else res.send("Wrong Password");
+			});
 		});
 	});
 
@@ -52,13 +57,16 @@ app.route("/register")
 		res.render("register");
 	})
 	.post((req, res) => {
-		const newUser = new User({
-			email: req.body.username,
-			password: md5(req.body.password),
-		});
-		newUser.save((err) => {
+		bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
 			if (err) return console.log(err);
-			res.render("secrets");
+			const newUser = new User({
+				email: req.body.username,
+				password: hash,
+			});
+			newUser.save((err) => {
+				if (err) return console.log(err);
+				res.render("secrets");
+			});
 		});
 	});
 
