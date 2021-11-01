@@ -1,19 +1,15 @@
 import React from "react";
 
 function ToDoItem(props) {
-  const [isCrossed, setIsCrossed] = React.useState(false);
-
-  function handleClick() {
-    setIsCrossed(!isCrossed);
-  }
-
+  console.log(props.key);
   return (
-    <li
-      style={{ textDecoration: isCrossed && "line-through" }}
-      onClick={handleClick}
+    <div
+      onClick={() => {
+        props.onChecked(props.itemNo);
+      }}
     >
-      {props.item}
-    </li>
+      <li>{props.item}</li>;
+    </div>
   );
 }
 
